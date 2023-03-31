@@ -26,15 +26,31 @@
         })
       }
 
+      function deleteAnalyticsCookies() {
+        document.cookie.split(';').forEach(function (cookie) {
+          var name = cookie.split('=')[0]
+          if (name.indexOf('_ga') === 0) {
+            document.cookie =
+              name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+          }
+        })
+      }
+
       function consentDenied() {
         gtag('consent', 'update', {
           ad_storage: 'denied',
           analytics_storage: 'denied',
         })
-        document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-
+        deleteAnalyticsCookies()
+        document.cookie.split(';').forEach(function (cookie) {
+          var name = cookie.split('=')[0].trim()
+          if (name.indexOf('_ga') === 0) {
+            document.cookie =
+              name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+          }
+        })
+        // Add code to hide the cookie banner or show a message that cookies were denied
       }
-
 
       function consentUpdated() {
         consentGranted()
