@@ -5,21 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      window.dataLayer = window.dataLayer || []
       function gtag() {
         dataLayer.push(arguments)
       }
+
+      window.dataLayer = window.dataLayer || []
       gtag('consent', 'default', {
         ad_storage: 'denied',
         analytics_storage: 'denied',
       })
 
-      if (document.cookie.indexOf('consent=1') > 1) {
+      if (document.cookie.indexOf('consent=1') > -1) {
         consentGranted()
-      } 
-      
-      if (document.cookie.indexOf('consent=0') > 1) {
-        consentDenied()
       }
 
       function consentGranted() {
@@ -28,23 +25,20 @@
           analytics_storage: 'granted',
         })
       }
+
       function consentDenied() {
         gtag('consent', 'update', {
           ad_storage: 'denied',
           analytics_storage: 'denied',
         })
+        dataLayer.push({ event: 'consentUpdate' })
+        document.cookie = 'consent=0'
       }
 
       function consentUpdated() {
         consentGranted()
         dataLayer.push({ event: 'consentUpdate' })
         document.cookie = 'consent=1'
-      }
-
-      function consentUpdated() {
-        consentDenied()
-        dataLayer.push({ event: 'consentUpdate' })
-        document.cookie = 'consent=0'
       }
     </script>
     <!-- Google Tag Manager -->
