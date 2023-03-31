@@ -31,8 +31,18 @@
           ad_storage: 'denied',
           analytics_storage: 'denied',
         })
-        dataLayer.push({ event: 'consentUpdate' })
-        document.cookie = 'consent=0'
+        // Delete the analytics cookies
+        var cookies = document.cookie.split('; ')
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i].split('=')
+          if (
+            cookie[0].indexOf('_ga') === 0 ||
+            cookie[0].indexOf('_gid') === 0
+          ) {
+            document.cookie =
+              cookie[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+          }
+        }
       }
 
       function consentUpdated() {
