@@ -20,6 +20,11 @@
           analytics_storage: 'granted',
         })
       }
+
+      function consentUpdated() {
+        consentGranted()
+        dataLayer.push({ event: 'consentUpdate' })
+      }
     </script>
     <!-- Google Tag Manager -->
     <script>
@@ -39,6 +44,6 @@
   </head>
   <body>
     <p>We are using cookies</p>
-    <button onclick="consentGranted()">Allow</button>
+    <button onclick="consentUpdated()">Allow</button>
   </body>
 </html>
