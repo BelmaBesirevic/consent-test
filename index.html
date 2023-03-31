@@ -36,6 +36,12 @@
         dataLayer.push({ event: 'consentUpdate' })
         document.cookie = 'consent=1'
       }
+
+      function consentUpdated() {
+        consentDenied()
+        dataLayer.push({ event: 'consentUpdate' })
+        document.cookie = 'consent=0'
+      }
     </script>
     <!-- Google Tag Manager -->
     <script>
