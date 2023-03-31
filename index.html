@@ -16,6 +16,8 @@
 
       if (document.cookie.indexOf('consent=1') > 1) {
         consentGranted()
+      } else if (document.cookie.indexOf('consent=0') > 1) {
+        consentDenied()
       }
 
       function consentGranted() {
