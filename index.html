@@ -13,6 +13,12 @@
         ad_storage: 'denied',
         analytics_storage: 'denied',
       })
+      function consentGranted() {
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          analytics_storage: 'granted',
+        })
+      }
     </script>
     <!-- Google Tag Manager -->
     <script>
@@ -32,6 +38,6 @@
   </head>
   <body>
     <p>We are using cookies</p>
-    <button>Allow</button>
+    <button onclick="consentGranted()">Allow</button>
   </body>
 </html>
